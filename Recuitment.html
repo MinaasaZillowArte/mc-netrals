@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rekrutmen Admin - NTRL Community</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%231a0a2a'/%3E%3Cpath d='M3,3 V13 H5 V8 H7 L9,13 H11 V3 H9 V8 H7 L5,3 H3Z' fill='%2300f6ff'/%3E%3C/svg%3E">
+
+    <style>
+        :root {
+            --bg-dark: #100a1f;
+            --bg-medium: #1a0a2a;
+            --primary: #00f6ff; /* Cyan */
+            --secondary: #ff00ff; /* Magenta */
+            --text-light: #e0e0e0;
+            --text-dark: #a0a0a0;
+        }
+
+        body {
+            font-family: 'Press Start 2P', cursive;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            background-image: radial-gradient(circle at top left, rgba(255, 0, 255, 0.1), transparent 30%),
+                              radial-gradient(circle at bottom right, rgba(0, 246, 255, 0.1), transparent 30%);
+            overflow-x: hidden;
+        }
+
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+        .bg-animation .block {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            animation: float 20s infinite linear;
+            bottom: -150px;
+        }
+        .bg-animation .block:nth-child(1) { left: 5%; animation-duration: 25s; }
+        .bg-animation .block:nth-child(2) { left: 80%; animation-duration: 30s; width: 60px; height: 60px; }
+        .bg-animation .block:nth-child(3) { left: 90%; animation-duration: 15s; }
+        .bg-animation .block:nth-child(4) { left: 10%; animation-duration: 22s; width: 20px; height: 20px; }
+        .bg-animation .block:nth-child(5) { left: 50%; animation-duration: 18s; }
+
+        @keyframes float {
+            from { transform: translateY(0) rotate(0deg); }
+            to { transform: translateY(-120vh) rotate(360deg); }
+        }
+
+        .pixel-shadow {
+            box-shadow: 8px 8px 0px var(--secondary);
+            transition: all 0.2s ease-out;
+        }
+        
+        .recruitment-card:hover .pixel-shadow {
+             box-shadow: 10px 10px 0px var(--primary), -10px -10px 0px var(--secondary);
+            transform: translate(2px, -2px);
+        }
+
+        .pixel-btn {
+            border: 4px solid var(--bg-dark);
+            transition: all 0.1s ease-in-out;
+            text-shadow: 2px 2px var(--bg-dark);
+        }
+        .pixel-btn:hover {
+            transform: translate(4px, 4px);
+            box-shadow: 4px 4px 0px rgba(0,0,0,0.4);
+        }
+        
+        ::-webkit-scrollbar { width: 12px; }
+        ::-webkit-scrollbar-track { background: var(--bg-dark); }
+        ::-webkit-scrollbar-thumb { background: var(--secondary); border: 2px solid var(--bg-dark); }
+        ::-webkit-scrollbar-thumb:hover { background: var(--primary); }
+    </style>
+</head>
+<body>
+    <div class="bg-animation">
+        <div class="block"></div><div class="block"></div><div class="block"></div><div class="block"></div><div class="block"></div>
+    </div>
+
+    <header class="py-5 text-center">
+        <a href="index.html" class="pixel-btn bg-[var(--primary)] hover:bg-[var(--secondary)] text-black text-lg px-8 py-3 inline-flex items-center space-x-3">
+             <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+            <span>Kembali</span>
+        </a>
+    </header>
+
+    <main class="container mx-auto px-4 py-12">
+        <div class="text-center mb-16">
+            <h1 class="text-4xl md:text-5xl text-white mb-4" style="text-shadow: 3px 3px 0 var(--primary);">Rekrutmen Admin</h1>
+            <p class="text-[var(--text-dark)] max-w-2xl mx-auto">Kami mencari Netralers berbakat untuk bergabung dengan tim dan membangun komunitas NTRL menjadi lebih baik!</p>
+        </div>
+
+        <!-- Recruitment Cards Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 max-w-7xl mx-auto">
+            
+            <!-- Arsitek Card -->
+            <div class="recruitment-card text-left">
+                 <div class="bg-[var(--bg-medium)] p-8 rounded-lg border-4 border-[var(--secondary)] pixel-shadow transition-all duration-300 h-full flex flex-col">
+                    <h2 class="text-2xl text-[var(--secondary)] mb-2">Admin Arsitek</h2>
+                    <p class="text-[var(--text-dark)] text-sm mb-6">Bertanggung jawab atas estetika dan proyek pembangunan di dalam server.</p>
+                    
+                    <h3 class="text-lg text-white mb-2">Tugas:</h3>
+                    <ul class="list-disc list-inside text-sm text-gray-400 mb-6 space-y-1">
+                        <li>Merancang dan memimpin proyek bangunan komunitas.</li>
+                        <li>Menilai dan memberi masukan pada karya pemain.</li>
+                        <li>Menjaga konsistensi tema arsitektur server.</li>
+                    </ul>
+
+                    <h3 class="text-lg text-white mb-2">Syarat:</h3>
+                    <ul class="list-disc list-inside text-sm text-gray-400 mb-6 space-y-1">
+                        <li>Memiliki portfolio bangunan yang mengesankan.</li>
+                        <li>Menguasai WorldEdit/VoxelSniper adalah nilai plus.</li>
+                        <li>Kreatif, komunikatif, dan bisa bekerja dalam tim.</li>
+                    </ul>
+
+                    <a href="https://discord.gg/3j4P6fVH" target="_blank" rel="noopener noreferrer" class="pixel-btn bg-[var(--secondary)] hover:bg-[var(--primary)] text-black text-center mt-auto px-6 py-3">
+                        Daftar Sekarang
+                    </a>
+                </div>
+            </div>
+
+            <!-- Keamanan Card -->
+            <div class="recruitment-card text-left">
+                <div class="bg-[var(--bg-medium)] p-8 rounded-lg border-4 border-[var(--secondary)] pixel-shadow transition-all duration-300 h-full flex flex-col">
+                    <h2 class="text-2xl text-[var(--secondary)] mb-2">Admin Keamanan</h2>
+                    <p class="text-[var(--text-dark)] text-sm mb-6">Menjaga ketertiban dan memastikan lingkungan bermain yang adil dan aman.</p>
+                    
+                    <h3 class="text-lg text-white mb-2">Tugas:</h3>
+                    <ul class="list-disc list-inside text-sm text-gray-400 mb-6 space-y-1">
+                        <li>Menangani laporan dari pemain dengan cepat.</li>
+                        <li>Memantau server dari aktivitas mencurigakan (cheat/grief).</li>
+                        <li>Menegakkan peraturan server secara konsisten.</li>
+                    </ul>
+
+                    <h3 class="text-lg text-white mb-2">Syarat:</h3>
+                    <ul class="list-disc list-inside text-sm text-gray-400 mb-6 space-y-1">
+                        <li>Memahami command dasar admin (kick/ban/mute).</li>
+                        <li>Tegas, adil, dan punya rekam jejak yang baik.</li>
+                        <li>Bisa tetap tenang dalam situasi konflik.</li>
+                    </ul>
+
+                    <a href="https://discord.gg/3j4P6fVH" target="_blank" rel="noopener noreferrer" class="pixel-btn bg-[var(--secondary)] hover:bg-[var(--primary)] text-black text-center mt-auto px-6 py-3">
+                        Daftar Sekarang
+                    </a>
+                </div>
+            </div>
+
+            <!-- Event Card -->
+            <div class="recruitment-card text-left">
+                 <div class="bg-[var(--bg-medium)] p-8 rounded-lg border-4 border-[var(--secondary)] pixel-shadow transition-all duration-300 h-full flex flex-col">
+                    <h2 class="text-2xl text-[var(--secondary)] mb-2">Admin Event</h2>
+                    <p class="text-[var(--text-dark)] text-sm mb-6">Merancang dan menjalankan acara-acara seru untuk menghidupkan komunitas.</p>
+                    
+                    <h3 class="text-lg text-white mb-2">Tugas:</h3>
+                    <ul class="list-disc list-inside text-sm text-gray-400 mb-6 space-y-1">
+                        <li>Membuat konsep event yang unik dan menarik.</li>
+                        <li>Mempersiapkan arena dan mekanisme event.</li>
+                        <li>Memandu jalannya event dari awal hingga akhir.</li>
+                    </ul>
+
+                    <h3 class="text-lg text-white mb-2">Syarat:</h3>
+                    <ul class="list-disc list-inside text-sm text-gray-400 mb-6 space-y-1">
+                        <li>Penuh ide kreatif dan bersemangat.</li>
+                        <li>Terorganisir dan mampu mengatur acara.</li>
+                        <li>Pandai berkomunikasi dan membangkitkan hype.</li>
+                    </ul>
+
+                    <a href="https://discord.gg/3j4P6fVH" target="_blank" rel="noopener noreferrer" class="pixel-btn bg-[var(--secondary)] hover:bg-[var(--primary)] text-black text-center mt-auto px-6 py-3">
+                        Daftar Sekarang
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="bg-black/50 border-t-4 border-t-[var(--secondary)] py-10 text-center mt-16">
+        <div class="container mx-auto px-4">
+            <p class="text-lg text-[var(--primary)] mb-4">NTRL Community</p>
+            <p class="text-[var(--text-dark)]">
+                &copy; <span id="year"></span> NTRL. Dibuat oleh Netralers, untuk Netralers.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>

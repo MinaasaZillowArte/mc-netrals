@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NTRL - Komunitas Minecraft Indonesia</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%231a0a2a'/%3E%3Cpath d='M3,3 V13 H5 V8 H7 L9,13 H11 V3 H9 V8 H7 L5,3 H3Z' fill='%2300f6ff'/%3E%3C/svg%3E">
+
+    <style>
+        :root {
+            --bg-dark: #100a1f;
+            --bg-medium: #1a0a2a;
+            --primary: #00f6ff; /* Cyan */
+            --secondary: #ff00ff; /* Magenta */
+            --text-light: #e0e0e0;
+            --text-dark: #a0a0a0;
+        }
+
+        body {
+            font-family: 'Press Start 2P', cursive;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            background-image: radial-gradient(circle at top left, rgba(255, 0, 255, 0.1), transparent 30%),
+                              radial-gradient(circle at bottom right, rgba(0, 246, 255, 0.1), transparent 30%);
+            overflow-x: hidden;
+        }
+        body.menu-open {
+            overflow: hidden;
+        }
+
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+        .bg-animation .block {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            animation: float 20s infinite linear;
+            bottom: -150px;
+        }
+        .bg-animation .block:nth-child(1) { left: 5%; animation-duration: 25s; }
+        .bg-animation .block:nth-child(2) { left: 80%; animation-duration: 30s; width: 60px; height: 60px; }
+        .bg-animation .block:nth-child(3) { left: 90%; animation-duration: 15s; }
+        .bg-animation .block:nth-child(4) { left: 10%; animation-duration: 22s; width: 20px; height: 20px; }
+        .bg-animation .block:nth-child(5) { left: 50%; animation-duration: 18s; }
+
+        @keyframes float {
+            from { transform: translateY(0) rotate(0deg); }
+            to { transform: translateY(-120vh) rotate(360deg); }
+        }
+
+        .pixel-shadow {
+            box-shadow: 8px 8px 0px var(--secondary);
+            transition: all 0.2s ease-out;
+        }
+        .pixel-shadow:hover {
+            box-shadow: 10px 10px 0px var(--primary), -10px -10px 0px var(--secondary);
+            transform: translate(2px, -2px);
+        }
+
+        .pixel-btn {
+            border: 4px solid var(--bg-dark);
+            transition: all 0.1s ease-in-out;
+            text-shadow: 2px 2px var(--bg-dark);
+        }
+        .pixel-btn:hover {
+            transform: translate(4px, 4px);
+            box-shadow: 4px 4px 0px rgba(0,0,0,0.4);
+        }
+        .pixel-btn:active {
+            transform: translate(8px, 8px);
+            box-shadow: none;
+        }
+        
+        .glowing-text {
+            animation: glowing 2s infinite;
+        }
+        @keyframes glowing {
+            0%, 100% { text-shadow: 0 0 3px #fff, 0 0 5px #fff, 0 0 7px var(--primary), 0 0 10px var(--primary); }
+            50% { text-shadow: 0 0 5px #fff, 0 0 10px var(--primary), 0 0 15px var(--primary), 0 0 20px var(--primary); }
+        }
+
+        .scroll-animate {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+        }
+        .scroll-animate.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        ::-webkit-scrollbar { width: 12px; }
+        ::-webkit-scrollbar-track { background: var(--bg-dark); }
+        ::-webkit-scrollbar-thumb { background: var(--secondary); border: 2px solid var(--bg-dark); }
+        ::-webkit-scrollbar-thumb:hover { background: var(--primary); }
+
+        .gallery-item img {
+            transition: transform 0.3s ease;
+        }
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+        
+        #mobile-menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(16, 10, 31, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transform: translateY(-100%);
+            transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        #mobile-menu.menu-open {
+            transform: translateY(0);
+        }
+        #mobile-menu a {
+            font-size: 1.5rem;
+            margin: 1.25rem 0;
+            color: var(--text-light);
+            transition: color 0.3s, transform 0.3s;
+        }
+        #mobile-menu a:hover {
+            color: var(--primary);
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-animation">
+        <div class="block"></div><div class="block"></div><div class="block"></div><div class="block"></div><div class="block"></div>
+    </div>
+
+    <header id="header" class="bg-black/50 backdrop-blur-md border-b-4 border-b-[var(--secondary)] fixed w-full top-0 z-[110] transition-all duration-300">
+        <div class="container mx-auto px-4">
+            <nav class="flex items-center justify-between h-20">
+                <a href="#" class="text-3xl text-[var(--primary)] hover:text-white transition-colors" style="text-shadow: 2px 2px 0 var(--secondary);">
+                    NTRL
+                </a>
+
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#hero" class="text-gray-300 hover:text-white transition-colors">Home</a>
+                    <a href="#about" class="text-gray-300 hover:text-white transition-colors">Tentang</a>
+                    <a href="#gallery" class="text-gray-300 hover:text-white transition-colors">Galeri</a>
+                    <a href="Info.html" class="text-gray-300 hover:text-white transition-colors">Info Admin</a>
+                    <a href="Recuitment.html" class="text-gray-300 hover:text-white transition-colors">Rekrutmen</a>
+                    <a href="https://minaasazillowarte.github.io/mc-status-page/" target="_blank" rel="noopener noreferrer" 
+                       class="text-[var(--primary)] glowing-text font-bold px-4 py-2 rounded-md border-2 border-[var(--primary)]/50 hover:bg-[var(--primary)]/10 transition-all">
+                        Server Status
+                    </a>
+                </div>
+
+                <button id="mobile-menu-btn" class="md:hidden text-white focus:outline-none z-50">
+                    <svg id="menu-open-icon" class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                    <svg id="menu-close-icon" class="w-8 h-8 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+            </nav>
+        </div>
+    </header>
+    
+    <div id="mobile-menu" class="md:hidden">
+        <a href="#hero" class="mobile-menu-link">Home</a>
+        <a href="#about" class="mobile-menu-link">Tentang</a>
+        <a href="#gallery" class="mobile-menu-link">Galeri</a>
+        <a href="Info.html" class="mobile-menu-link">Info Admin</a>
+        <a href="recruitment.html" class="mobile-menu-link">Rekrutmen</a>
+        <a href="https://minaasazillowarte.github.io/mc-status-page/" target="_blank" rel="noopener noreferrer" class="mobile-menu-link text-[var(--primary)] glowing-text">
+            Server Status
+        </a>
+    </div>
+
+    <main>
+        <section id="hero" class="min-h-screen flex items-center justify-center text-center pt-20 px-4">
+            <div class="bg-black/60 p-8 rounded-lg border-2 border-[var(--primary)]/50 pixel-shadow">
+                <h1 class="text-4xl md:text-6xl lg:text-7xl text-white leading-tight mb-4 animate-pulse">
+                    Realitas Baru Menanti
+                </h1>
+                <p class="text-lg md:text-xl text-[var(--text-light)] mb-8 max-w-2xl mx-auto">
+                    Selamat datang di NTRL, tempat para Netralers berkreasi. Bangun, jelajahi, dan kuasai dunia tanpa batas.
+                </p>
+                <a href="https://discord.gg/3j4P6fVH" target="_blank" rel="noopener noreferrer" class="pixel-btn bg-[var(--primary)] hover:bg-[var(--secondary)] text-black text-xl px-10 py-4 inline-block">
+                    Jadilah Netraler!
+                </a>
+            </div>
+        </section>
+
+        <section id="about" class="py-24 bg-black/30">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-16 scroll-animate">
+                    <h2 class="text-3xl md:text-4xl text-[var(--primary)] mb-4">Selamat Datang, Netraler!</h2>
+                    <p class="max-w-3xl mx-auto text-[var(--text-dark)]">
+                        NTRL bukan sekadar server. Kami adalah sebuah ekosistem digital untuk para pemain yang ingin mendorong batas kreativitas.
+                    </p>
+                </div>
+                <div class="grid md:grid-cols-3 gap-10 text-center">
+                    <div class="bg-[var(--bg-medium)] p-8 border-4 border-stone-700/50 rounded-lg transition-transform hover:scale-105 scroll-animate">
+                        <svg class="w-16 h-16 mx-auto mb-4 text-[var(--primary)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                        <h3 class="text-2xl text-white mb-2">Komunitas Solid</h3>
+                        <p class="text-[var(--text-dark)]">Temukan rekan, bangun aliansi, dan ikuti event eksklusif dengan hadiah menarik.</p>
+                    </div>
+                    <div class="bg-[var(--bg-medium)] p-8 border-4 border-stone-700/50 rounded-lg transition-transform hover:scale-105 scroll-animate" style="transition-delay: 200ms;">
+                        <svg class="w-16 h-16 mx-auto mb-4 text-[var(--primary)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 12.795A9 9 0 1111.21 3 7 7 0 0021 12.795z"></path><path d="M15 5L9 5M12 3v2m-3 7l-3 3m6 0l3 3m-6-6v6"></path></svg>
+                        <h3 class="text-2xl text-white mb-2">Dunia Unik</h3>
+                        <p class="text-[var(--text-dark)]">Jelajahi bioma kustom, dungeon tersembunyi, dan mekanik game yang belum pernah ada.</p>
+                    </div>
+                    <div class="bg-[var(--bg-medium)] p-8 border-4 border-stone-700/50 rounded-lg transition-transform hover:scale-105 scroll-animate" style="transition-delay: 400ms;">
+                         <svg class="w-16 h-16 mx-auto mb-4 text-[var(--primary)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                        <h3 class="text-2xl text-white mb-2">Server Terproteksi</h3>
+                        <p class="text-[var(--text-dark)]">Bermain dengan tenang. Server kami dilengkapi anti-cheat dan sistem backup canggih.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="gallery" class="py-24">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-16 scroll-animate">
+                    <h2 class="text-3xl md:text-4xl text-[var(--primary)] mb-4">Galeri Kreasi Netralers</h2>
+                    <p class="max-w-3xl mx-auto text-[var(--text-dark)]">
+                        Inilah beberapa mahakarya yang lahir dari imajinasi para anggota komunitas kami.
+                    </p>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="gallery-item bg-[var(--bg-medium)] p-4 border-4 border-stone-700/50 rounded-lg pixel-shadow scroll-animate">
+                        <img src="https://placehold.co/600x400/100a1f/00f6ff?text=Cyber-Castle" alt="Screenshot Cyber-Castle" class="w-full h-auto border-2 border-black">
+                        <p class="text-center mt-3 text-white">Cyber-Castle</p>
+                    </div>
+                    <div class="gallery-item bg-[var(--bg-medium)] p-4 border-4 border-stone-700/50 rounded-lg pixel-shadow scroll-animate" style="transition-delay: 200ms;">
+                        <img src="https://placehold.co/600x400/100a1f/ff00ff?text=Neon+Metropolis" alt="Screenshot Neon Metropolis" class="w-full h-auto border-2 border-black">
+                        <p class="text-center mt-3 text-white">Neon Metropolis</p>
+                    </div>
+                    <div class="gallery-item bg-[var(--bg-medium)] p-4 border-4 border-stone-700/50 rounded-lg pixel-shadow scroll-animate" style="transition-delay: 400ms;">
+                        <img src="https://placehold.co/600x400/100a1f/FFFFFF?text=Void+Monolith" alt="Screenshot Void Monolith" class="w-full h-auto border-2 border-black">
+                        <p class="text-center mt-3 text-white">Void Monolith</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="join" class="py-24 bg-black/30">
+            <div class="container mx-auto px-4 text-center">
+                <div class="bg-[var(--bg-medium)] border-4 border-[var(--primary)]/50 p-10 rounded-lg pixel-shadow scroll-animate max-w-4xl mx-auto">
+                    <h2 class="text-3xl md:text-4xl text-white mb-4">Saatnya Bergabung!</h2>
+                    <p class="text-[var(--text-dark)] max-w-2xl mx-auto mb-8">
+                        Jadilah bagian dari komunitas NTRL. Diskusikan ide, pamerkan kreasimu, dan jadilah bagian dari petualangan tanpa akhir. Klik tombol di bawah untuk masuk ke server Discord kami.
+                    </p>
+                    <a href="https://discord.gg/3j4P6fVH" target="_blank" rel="noopener noreferrer" class="pixel-btn bg-[var(--secondary)] hover:bg-[var(--primary)] text-black text-xl px-12 py-5 inline-flex items-center space-x-4">
+                        <span>Gabung Sekarang</span>
+                        <svg class="w-8 h-8 transition-transform group-hover:translate-x-2" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8-8-8z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-black/50 border-t-4 border-t-[var(--secondary)] py-8">
+        <div class="container mx-auto px-4 flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0 text-sm">
+            <div class="text-[var(--text-dark)] order-3 md:order-1">
+                 &copy; <span id="year"></span> NTRL Community
+            </div>
+            <div class="flex items-center space-x-2 text-[var(--text-light)] order-1 md:order-2">
+                <span>Made by Mizae with</span>
+                <svg class="w-5 h-5 text-red-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" />
+                </svg>
+            </div>
+            <div class="text-2xl text-[var(--primary)] order-2 md:order-3" style="text-shadow: 2px 2px 0 var(--secondary);">
+                NTRL
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const openIcon = document.getElementById('menu-open-icon');
+            const closeIcon = document.getElementById('menu-close-icon');
+            const menuLinks = document.querySelectorAll('.mobile-menu-link');
+            const body = document.body;
+
+            const toggleMenu = () => {
+                mobileMenu.classList.toggle('menu-open');
+                openIcon.classList.toggle('hidden');
+                closeIcon.classList.toggle('hidden');
+                body.classList.toggle('menu-open');
+            };
+
+            mobileMenuBtn.addEventListener('click', toggleMenu);
+
+            menuLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    if (link.href.includes('#')) {
+                        if (mobileMenu.classList.contains('menu-open')) {
+                            toggleMenu();
+                        }
+                    }
+                });
+            });
+
+            const scrollElements = document.querySelectorAll('.scroll-animate');
+            const elementInView = (el) => {
+                const elementTop = el.getBoundingClientRect().top;
+                return elementTop <= (window.innerHeight || document.documentElement.clientHeight) - 50;
+            };
+            const handleScrollAnimation = () => {
+                scrollElements.forEach((el) => {
+                    if (elementInView(el)) {
+                        el.classList.add('is-visible');
+                    }
+                });
+            };
+            window.addEventListener('scroll', handleScrollAnimation);
+            handleScrollAnimation();
+
+            document.getElementById('year').textContent = new Date().getFullYear();
+        });
+    </script>
+</body>
+</html>
