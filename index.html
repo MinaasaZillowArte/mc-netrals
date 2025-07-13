@@ -94,7 +94,7 @@
             0%, 100% { text-shadow: 0 0 3px #fff, 0 0 5px #fff, 0 0 7px var(--primary), 0 0 10px var(--primary); }
             50% { text-shadow: 0 0 5px #fff, 0 0 10px var(--primary), 0 0 15px var(--primary), 0 0 20px var(--primary); }
         }
-
+        
         .scroll-animate {
             opacity: 0;
             transform: translateY(40px);
@@ -109,13 +109,6 @@
         ::-webkit-scrollbar-track { background: var(--bg-dark); }
         ::-webkit-scrollbar-thumb { background: var(--secondary); border: 2px solid var(--bg-dark); }
         ::-webkit-scrollbar-thumb:hover { background: var(--primary); }
-
-        .gallery-item img {
-            transition: transform 0.3s ease;
-        }
-        .gallery-item:hover img {
-            transform: scale(1.05);
-        }
         
         #mobile-menu {
             position: fixed;
@@ -146,6 +139,26 @@
             color: var(--primary);
             transform: scale(1.1);
         }
+        
+        #header nav a {
+            position: relative;
+            padding: 8px 4px; /* Adjusted padding */
+            transition: color 0.3s ease-out;
+        }
+        #header nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 3px;
+            background-color: var(--primary);
+            transition: width 0.3s ease-out;
+        }
+        #header nav a:hover::after, #header nav a.active-link::after {
+            width: 100%;
+        }
     </style>
 </head>
 <body>
@@ -156,18 +169,19 @@
     <header id="header" class="bg-black/50 backdrop-blur-md border-b-4 border-b-[var(--secondary)] fixed w-full top-0 z-[110] transition-all duration-300">
         <div class="container mx-auto px-4">
             <nav class="flex items-center justify-between h-20">
-                <a href="#" class="text-3xl text-[var(--primary)] hover:text-white transition-colors" style="text-shadow: 2px 2px 0 var(--secondary);">
+                <a href="#hero" class="text-3xl text-[var(--primary)] hover:text-white transition-colors" style="text-shadow: 2px 2px 0 var(--secondary);">
                     NTRL
                 </a>
 
-                <div class="hidden md:flex items-center space-x-8">
-                    <a href="#hero" class="text-gray-300 hover:text-white transition-colors">Home</a>
-                    <a href="#about" class="text-gray-300 hover:text-white transition-colors">Tentang</a>
-                    <a href="#gallery" class="text-gray-300 hover:text-white transition-colors">Galeri</a>
-                    <a href="Info.html" class="text-gray-300 hover:text-white transition-colors">Info Admin</a>
-                    <a href="Recuitment.html" class="text-gray-300 hover:text-white transition-colors">Rekrutmen</a>
+                <div class="hidden md:flex items-center space-x-6 text-xs">
+                    <a href="#hero" class="text-gray-300 hover:text-white active-link">Home</a>
+                    <a href="#rules" class="text-gray-300 hover:text-white">Peraturan</a>
+                    <a href="Info.html" class="text-gray-300 hover:text-white">Info Admin</a>
+                    <a href="Recuitment.html" class="text-gray-300 hover:text-white">Rekrutmen</a>
+                    <a href="faq.html" class="text-gray-300 hover:text-white">FAQ</a>
+                    <a href="changelogs.html" class="text-gray-300 hover:text-white">Changelogs</a>
                     <a href="https://minaasazillowarte.github.io/mc-status-page/" target="_blank" rel="noopener noreferrer" 
-                       class="text-[var(--primary)] glowing-text font-bold px-4 py-2 rounded-md border-2 border-[var(--primary)]/50 hover:bg-[var(--primary)]/10 transition-all">
+                       class="text-[var(--primary)] glowing-text font-bold px-3 py-2 rounded-md border-2 border-[var(--primary)]/50 hover:bg-[var(--primary)]/10 transition-all">
                         Server Status
                     </a>
                 </div>
@@ -182,10 +196,11 @@
     
     <div id="mobile-menu" class="md:hidden">
         <a href="#hero" class="mobile-menu-link">Home</a>
-        <a href="#about" class="mobile-menu-link">Tentang</a>
-        <a href="#gallery" class="mobile-menu-link">Galeri</a>
+        <a href="#rules" class="mobile-menu-link">Peraturan</a>
         <a href="Info.html" class="mobile-menu-link">Info Admin</a>
-        <a href="recruitment.html" class="mobile-menu-link">Rekrutmen</a>
+        <a href="Recuitment.html" class="mobile-menu-link">Rekrutmen</a>
+        <a href="faq.html" class="mobile-menu-link">FAQ</a>
+        <a href="changelogs.html" class="mobile-menu-link">Changelogs</a>
         <a href="https://minaasazillowarte.github.io/mc-status-page/" target="_blank" rel="noopener noreferrer" class="mobile-menu-link text-[var(--primary)] glowing-text">
             Server Status
         </a>
@@ -206,34 +221,26 @@
             </div>
         </section>
 
-        <section id="about" class="py-24 bg-black/30">
-            <div class="container mx-auto px-4">
+        <section id="rules" class="py-24">
+             <div class="container mx-auto px-4 max-w-4xl">
                 <div class="text-center mb-16 scroll-animate">
-                    <h2 class="text-3xl md:text-4xl text-[var(--primary)] mb-4">Selamat Datang, Netraler!</h2>
+                    <h2 class="text-3xl md:text-4xl text-[var(--primary)] mb-4">Aturan Main</h2>
                     <p class="max-w-3xl mx-auto text-[var(--text-dark)]">
-                        NTRL bukan sekadar server. Kami adalah sebuah ekosistem digital untuk para pemain yang ingin mendorong batas kreativitas.
+                        Mari kita jaga komunitas tetap asyik dan adil untuk semua.
                     </p>
                 </div>
-                <div class="grid md:grid-cols-3 gap-10 text-center">
-                    <div class="bg-[var(--bg-medium)] p-8 border-4 border-stone-700/50 rounded-lg transition-transform hover:scale-105 scroll-animate">
-                        <svg class="w-16 h-16 mx-auto mb-4 text-[var(--primary)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
-                        <h3 class="text-2xl text-white mb-2">Komunitas Solid</h3>
-                        <p class="text-[var(--text-dark)]">Temukan rekan, bangun aliansi, dan ikuti event eksklusif dengan hadiah menarik.</p>
-                    </div>
-                    <div class="bg-[var(--bg-medium)] p-8 border-4 border-stone-700/50 rounded-lg transition-transform hover:scale-105 scroll-animate" style="transition-delay: 200ms;">
-                        <svg class="w-16 h-16 mx-auto mb-4 text-[var(--primary)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 12.795A9 9 0 1111.21 3 7 7 0 0021 12.795z"></path><path d="M15 5L9 5M12 3v2m-3 7l-3 3m6 0l3 3m-6-6v6"></path></svg>
-                        <h3 class="text-2xl text-white mb-2">Dunia Unik</h3>
-                        <p class="text-[var(--text-dark)]">Jelajahi bioma kustom, dungeon tersembunyi, dan mekanik game yang belum pernah ada.</p>
-                    </div>
-                    <div class="bg-[var(--bg-medium)] p-8 border-4 border-stone-700/50 rounded-lg transition-transform hover:scale-105 scroll-animate" style="transition-delay: 400ms;">
-                         <svg class="w-16 h-16 mx-auto mb-4 text-[var(--primary)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
-                        <h3 class="text-2xl text-white mb-2">Server Terproteksi</h3>
-                        <p class="text-[var(--text-dark)]">Bermain dengan tenang. Server kami dilengkapi anti-cheat dan sistem backup canggih.</p>
-                    </div>
+                <div class="bg-[var(--bg-medium)] p-8 rounded-lg border-4 border-stone-700/50 scroll-animate">
+                    <ul class="space-y-4 text-sm md:text-base">
+                        <li class="flex items-start"><span class="text-[var(--primary)] mr-4">1.</span><span>Hormati semua pemain. Dilarang keras SARA, bullying, dan berkata kasar berlebihan.</span></li>
+                        <li class="flex items-start"><span class="text-[var(--primary)] mr-4">2.</span><span>Dilarang menggunakan cheat, hack, x-ray, atau modifikasi lain yang merugikan.</span></li>
+                        <li class="flex items-start"><span class="text-[var(--primary)] mr-4">3.</span><span>Dilarang melakukan griefing (merusak bangunan orang lain) di luar area klaim.</span></li>
+                        <li class="flex items-start"><span class="text-[var(--primary)] mr-4">4.</span><span>Jangan spamming atau flooding chat. Gunakan chat dengan bijak.</span></li>
+                        <li class="flex items-start"><span class="text-[var(--primary)] mr-4">5.</span><span>Patuhi instruksi dari tim Admin. Keputusan Admin adalah final.</span></li>
+                    </ul>
                 </div>
             </div>
         </section>
-        
+
         <section id="join" class="py-24 bg-black/30">
             <div class="container mx-auto px-4 text-center">
                 <div class="bg-[var(--bg-medium)] border-4 border-[var(--primary)]/50 p-10 rounded-lg pixel-shadow scroll-animate max-w-4xl mx-auto">
@@ -277,6 +284,8 @@
             const closeIcon = document.getElementById('menu-close-icon');
             const menuLinks = document.querySelectorAll('.mobile-menu-link');
             const body = document.body;
+            const navLinks = document.querySelectorAll('#header nav a');
+            const sections = document.querySelectorAll('main section');
 
             const toggleMenu = () => {
                 mobileMenu.classList.toggle('menu-open');
@@ -309,8 +318,33 @@
                     }
                 });
             };
-            window.addEventListener('scroll', handleScrollAnimation);
+
+            // Highlight nav link on scroll
+            const handleNavHighlight = () => {
+                 let current = 'hero'; // Default to hero
+                 sections.forEach(section => {
+                     const sectionTop = section.offsetTop;
+                     if(pageYOffset >= sectionTop - 100){
+                         current = section.getAttribute('id');
+                     }
+                 });
+                 
+                 navLinks.forEach(a => {
+                    a.classList.remove('active-link');
+                    // Check if the link's href contains the current section id
+                    if(a.href && a.href.includes('#' + current)){
+                        a.classList.add('active-link');
+                    }
+                 });
+            };
+            
+            window.addEventListener('scroll', () => {
+                handleScrollAnimation();
+                handleNavHighlight();
+            });
+            
             handleScrollAnimation();
+            handleNavHighlight();
 
             document.getElementById('year').textContent = new Date().getFullYear();
         });
