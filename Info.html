@@ -31,6 +31,9 @@
                               radial-gradient(circle at bottom right, rgba(0, 246, 255, 0.1), transparent 30%);
             overflow-x: hidden;
         }
+        body.menu-open {
+            overflow: hidden;
+        }
 
         .bg-animation {
             position: fixed;
@@ -70,21 +73,75 @@
              box-shadow: 10px 10px 0px var(--primary), -10px -10px 0px var(--secondary);
             transform: translate(2px, -2px);
         }
-
-        .pixel-btn {
-            border: 4px solid var(--bg-dark);
-            transition: all 0.1s ease-in-out;
-            text-shadow: 2px 2px var(--bg-dark);
-        }
-        .pixel-btn:hover {
-            transform: translate(4px, 4px);
-            box-shadow: 4px 4px 0px rgba(0,0,0,0.4);
-        }
         
+        .glowing-text {
+            animation: glowing 2s infinite;
+        }
+        @keyframes glowing {
+            0%, 100% { text-shadow: 0 0 3px #fff, 0 0 5px #fff, 0 0 7px var(--primary), 0 0 10px var(--primary); }
+            50% { text-shadow: 0 0 5px #fff, 0 0 10px var(--primary), 0 0 15px var(--primary), 0 0 20px var(--primary); }
+        }
+
         ::-webkit-scrollbar { width: 12px; }
         ::-webkit-scrollbar-track { background: var(--bg-dark); }
         ::-webkit-scrollbar-thumb { background: var(--secondary); border: 2px solid var(--bg-dark); }
         ::-webkit-scrollbar-thumb:hover { background: var(--primary); }
+        
+        #mobile-menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(16, 10, 31, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transform: translateY(-100%);
+            transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        #mobile-menu.menu-open {
+            transform: translateY(0);
+        }
+        #mobile-menu a {
+            font-size: 1.5rem;
+            margin: 1.25rem 0;
+            color: var(--text-light);
+            transition: color 0.3s, transform 0.3s;
+        }
+        #mobile-menu a:hover {
+            color: var(--primary);
+            transform: scale(1.1);
+        }
+        
+        #header nav a {
+            position: relative;
+            padding: 8px 4px;
+            transition: color 0.3s ease-out;
+        }
+        #header nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 3px;
+            background-color: var(--primary);
+            transition: width 0.3s ease-out;
+        }
+        #header nav a:hover::after, #header nav a.active-link::after {
+            width: 100%;
+        }
+        .active-link {
+            color: var(--primary) !important;
+        }
+        .active-link::after {
+             width: 100%;
+        }
     </style>
 </head>
 <body>
@@ -92,12 +149,45 @@
         <div class="block"></div><div class="block"></div><div class="block"></div><div class="block"></div><div class="block"></div>
     </div>
 
-    <header class="py-5 text-center">
-        <a href="index.html" class="pixel-btn bg-[var(--primary)] hover:bg-[var(--secondary)] text-black text-lg px-8 py-3 inline-flex items-center space-x-3">
-             <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
-            <span>Kembali</span>
-        </a>
+    <header id="header" class="bg-black/50 backdrop-blur-md border-b-4 border-b-[var(--secondary)] sticky w-full top-0 z-[110] transition-all duration-300">
+        <div class="container mx-auto px-4">
+            <nav class="flex items-center justify-between h-20">
+                <a href="index.html" class="text-3xl text-[var(--primary)] hover:text-white transition-colors" style="text-shadow: 2px 2px 0 var(--secondary);">
+                    NTRL
+                </a>
+
+                <div class="hidden md:flex items-center space-x-6 text-xs">
+                    <a href="index.html#hero" class="text-gray-300 hover:text-white">Home</a>
+                    <a href="index.html#rules" class="text-gray-300 hover:text-white">Peraturan</a>
+                    <a href="Info.html" class="text-gray-300 hover:text-white active-link">Info Admin</a>
+                    <a href="Recuitment.html" class="text-gray-300 hover:text-white">Rekrutmen</a>
+                    <a href="faq.html" class="text-gray-300 hover:text-white">FAQ</a>
+                    <a href="changelogs.html" class="text-gray-300 hover:text-white">Changelogs</a>
+                    <a href="https://minaasazillowarte.github.io/mc-status-page/" target="_blank" rel="noopener noreferrer" 
+                       class="text-[var(--primary)] glowing-text font-bold px-3 py-2 rounded-md border-2 border-[var(--primary)]/50 hover:bg-[var(--primary)]/10 transition-all">
+                        Server Status
+                    </a>
+                </div>
+
+                <button id="mobile-menu-btn" class="md:hidden text-white focus:outline-none z-50">
+                    <svg id="menu-open-icon" class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                    <svg id="menu-close-icon" class="w-8 h-8 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+            </nav>
+        </div>
     </header>
+    
+    <div id="mobile-menu" class="md:hidden">
+        <a href="index.html#hero" class="mobile-menu-link">Home</a>
+        <a href="index.html#rules" class="mobile-menu-link">Peraturan</a>
+        <a href="Info.html" class="mobile-menu-link">Info Admin</a>
+        <a href="Recuitment.html" class="mobile-menu-link">Rekrutmen</a>
+        <a href="faq.html" class="mobile-menu-link">FAQ</a>
+        <a href="changelogs.html" class="mobile-menu-link">Changelogs</a>
+        <a href="https://minaasazillowarte.github.io/mc-status-page/" target="_blank" rel="noopener noreferrer" class="mobile-menu-link text-[var(--primary)] glowing-text">
+            Server Status
+        </a>
+    </div>
 
     <main class="container mx-auto px-4 py-12">
         <div class="text-center mb-16">
@@ -105,9 +195,10 @@
             <p class="text-[var(--text-dark)] max-w-2xl mx-auto">Orang-orang di balik layar yang menjaga server tetap asyik dan teratur.</p>
         </div>
 
-        <!-- Owners Grid -->
+        <div class="text-center mb-10">
+            <h2 class="text-3xl text-[var(--secondary)] mb-4">Owners</h2>
+        </div>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-4xl mx-auto mb-16">
-            <!-- Owner NTRL Card -->
             <div class="admin-card text-center">
                 <div class="bg-[var(--bg-medium)] p-6 rounded-lg border-4 border-[var(--primary)] pixel-shadow transition-all duration-300 h-full flex flex-col">
                     <h2 class="text-2xl text-[var(--primary)]">Yann</h2>
@@ -121,7 +212,6 @@
                 </div>
             </div>
 
-            <!-- Owner Server Card -->
             <div class="admin-card text-center">
                 <div class="bg-[var(--bg-medium)] p-6 rounded-lg border-4 border-[var(--primary)] pixel-shadow transition-all duration-300 h-full flex flex-col">
                     <h2 class="text-2xl text-[var(--primary)]">Mizae</h2>
@@ -135,21 +225,68 @@
                 </div>
             </div>
         </div>
+        
+        <div class="text-center mt-20 mb-10">
+            <h2 class="text-3xl text-[var(--secondary)] mb-4">Admins</h2>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 max-w-7xl mx-auto">
+            <div class="admin-card text-center">
+                <div class="bg-[var(--bg-medium)] p-6 rounded-lg border-4 border-dashed border-gray-600 transition-all duration-300 h-full flex flex-col justify-center items-center">
+                    <h2 class="text-2xl text-gray-500">Coming Soon</h2>
+                    <p class="text-sm text-gray-600 mt-2">[ Admin Arsitek ]</p>
+                </div>
+            </div>
 
+            <div class="admin-card text-center">
+                <div class="bg-[var(--bg-medium)] p-6 rounded-lg border-4 border-dashed border-gray-600 transition-all duration-300 h-full flex flex-col justify-center items-center">
+                    <h2 class="text-2xl text-gray-500">Coming Soon</h2>
+                    <p class="text-sm text-gray-600 mt-2">[ Admin Keamanan ]</p>
+                </div>
+            </div>
+
+            <div class="admin-card text-center">
+                <div class="bg-[var(--bg-medium)] p-6 rounded-lg border-4 border-dashed border-gray-600 transition-all duration-300 h-full flex flex-col justify-center items-center">
+                    <h2 class="text-2xl text-gray-500">Coming Soon</h2>
+                    <p class="text-sm text-gray-600 mt-2">[ Admin Event ]</p>
+                </div>
+            </div>
         </div>
     </main>
 
-    <footer class="bg-black/50 border-t-4 border-t-[var(--secondary)] py-10 text-center mt-16">
-        <div class="container mx-auto px-4">
-            <p class="text-lg text-[var(--primary)] mb-4">NTRL Community</p>
-            <p class="text-[var(--text-dark)]">
-                &copy; <span id="year"></span> NTRL. Dibuat oleh Netralers, untuk Netralers.
-            </p>
+    <footer class="bg-black/50 border-t-4 border-t-[var(--secondary)] py-8 mt-24">
+        <div class="container mx-auto px-4 flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0 text-sm">
+            <div class="text-[var(--text-dark)] order-3 md:order-1">
+                 &copy; <span id="year"></span> NTRL Community
+            </div>
+            <div class="flex items-center space-x-2 text-[var(--text-light)] order-1 md:order-2">
+                <span>Made by Mizae with</span>
+                <svg class="w-5 h-5 text-red-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" />
+                </svg>
+            </div>
+            <div class="text-2xl text-[var(--primary)] order-2 md:order-3" style="text-shadow: 2px 2px 0 var(--secondary);">
+                NTRL
+            </div>
         </div>
     </footer>
 
     <script>
         document.getElementById('year').textContent = new Date().getFullYear();
+
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const openIcon = document.getElementById('menu-open-icon');
+        const closeIcon = document.getElementById('menu-close-icon');
+        const body = document.body;
+
+        const toggleMenu = () => {
+            mobileMenu.classList.toggle('menu-open');
+            openIcon.classList.toggle('hidden');
+            closeIcon.classList.toggle('hidden');
+            body.classList.toggle('menu-open');
+        };
+
+        mobileMenuBtn.addEventListener('click', toggleMenu);
     </script>
 </body>
 </html>
