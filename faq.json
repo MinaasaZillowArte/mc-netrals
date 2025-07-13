@@ -1,0 +1,119 @@
+{
+    "faq": [
+      {
+        "category": "Pertanyaan Umum",
+        "items": [
+          {
+            "question": "Bagaimana cara bergabung dengan server NTRL?",
+            "answer": "Sangat mudah! Kamu hanya perlu klik tombol 'Jadilah Netraler!' atau 'Gabung Sekarang' di halaman utama kami. Kamu akan otomatis diarahkan ke server Discord kami. Di sana, kamu akan menemukan IP server dan semua informasi lainnya.",
+            "keywords": ["gabung", "join", "ip", "discord", "masuk", "server", "alamat"]
+          },
+          {
+            "question": "Apakah server ini gratis?",
+            "answer": "Ya, 100% gratis! NTRL Community adalah server untuk semua orang. Kami tidak memungut biaya untuk bergabung dan bermain. Namun, kami menyediakan opsi donasi bagi yang ingin mendukung operasional server.",
+            "keywords": ["gratis", "bayar", "biaya", "free", "donasi"]
+          },
+          {
+            "question": "Versi Minecraft apa yang digunakan?",
+            "answer": "Kami selalu berusaha menggunakan versi Minecraft Java Edition terbaru. Untuk versi spesifik yang sedang aktif, silakan cek channel #minecraft-information di Discord kami agar selalu update.",
+            "keywords": ["versi", "version", "java", "terbaru", "update"]
+          },
+          {
+              "question": "Siapa saja pemilik server ini?",
+              "answer": "Server ini dimiliki dan dikelola oleh Yann (Owner Komunitas) dan Mizae (Owner Server). Anda dapat menemukan info kontak mereka di halaman 'Info Admin'.",
+              "keywords": ["owner", "pemilik", "admin", "yann", "mizae", "kontak"]
+          },
+          {
+              "question": "Di mana saya bisa melihat pengumuman terbaru?",
+              "answer": "Semua pengumuman penting, termasuk update, event, dan maintenance, akan diposting di channel #minecraft-information di server Discord kami.",
+              "keywords": ["pengumuman", "info", "update", "berita", "announcement"]
+          }
+        ]
+      },
+      {
+          "category": "Gameplay & Fitur",
+          "items": [
+              {
+                  "question": "Bagaimana cara melindungi bangunan saya dari grief?",
+                  "answer": "Kami menggunakan sistem otomatis walau tidak terlihat tapi ketika player lain coba hancurin rumah atau lainnya maka player itu akan di banned dari server kami.",
+                  "keywords": ["klaim", "claim", "lahan", "lindungi", "bangunan", "grief", "aman"]
+              },
+              {
+                  "question": "Apakah ada sistem ekonomi di server?",
+                  "answer": "Tentu! Kami saat ini sedang membuatnya!.",
+                  "keywords": ["ekonomi", "uang", "toko", "shop", "jual", "beli", "dagang"]
+              },
+              {
+                  "question": "Bagaimana cara mendapatkan uang?",
+                  "answer": "Nanti Kamu bisa mendapatkan uang dengan berbagai cara, seperti menjual hasil farm, menyelesaikan pekerjaan (jobs), memenangkan event, atau menjual item langka ke pemain lain.",
+                  "keywords": ["uang", "money", "dapat", "cara", "jobs", "pekerjaan"]
+              },
+              {
+                  "question": "Dunia apa saja yang tersedia di server?",
+                  "answer": "Kami memiliki dunia Survival utama, Nether, dan The End. Terkadang kami juga membuka dunia khusus untuk event atau resource (dunia tambang) yang di-reset secara berkala.",
+                  "keywords": ["dunia", "world", "map", "survival", "resource", "tambang"]
+              },
+              {
+                  "question": "Bolehkah saya membuat farm otomatis (AFK farm)?",
+                  "answer": "Farm otomatis pada umumnya diizinkan selama tidak menyebabkan lag yang parah pada server. Harap desain farm Anda seefisien mungkin. Jika farm Anda terbukti memberatkan server, admin berhak menonaktifkannya.",
+                  "keywords": ["farm", "afk", "otomatis", "lag", "redstone"]
+              }
+          ]
+      },
+      {
+          "category": "Peraturan & Pelanggaran",
+          "items": [
+              {
+                  "question": "Apa yang harus dilakukan jika saya menemukan cheater atau hacker?",
+                  "answer": "Segera laporkan ke tim Admin yang sedang online melalui Discord atau chat di dalam game. Sertakan bukti seperti screenshot atau rekaman video jika memungkinkan. Jangan mencoba menghadapi cheater sendirian.",
+                  "keywords": ["lapor", "cheat", "cheater", "hack", "curang", "report"]
+              },
+              {
+                  "question": "Apa saja aturan chat di server?",
+                  "answer": "Aturan utama adalah saling menghormati. Dilarang keras berkata kasar berlebihan, melakukan spam, promosi berlebihan (iklan), dan menyebarkan informasi pribadi. Selengkapnya ada di halaman Peraturan.",
+                  "keywords": ["aturan", "chat", "rules", "spam", "kata", "kasar"]
+              },
+              {
+                  "question": "Apa konsekuensi dari melanggar peraturan?",
+                  "answer": "Konsekuensi bervariasi tergantung tingkat pelanggaran, mulai dari peringatan (warn), mute (tidak bisa chat), kick, ban sementara, hingga ban permanen untuk pelanggaran berat.",
+                  "keywords": ["hukuman", "ban", "kick", "mute", "konsekuensi", "pelanggaran"]
+              },
+              {
+                  "question": "Apakah saya boleh menggunakan akun alternatif (alt)?",
+                  "answer": "Penggunaan akun alternatif diizinkan untuk keperluan tertentu, seperti AFK di farm. Namun, menyalahgunakan alt untuk keuntungan tidak adil (misalnya dalam event) atau untuk menghindari hukuman adalah dilarang keras.",
+                  "keywords": ["alt", "akun", "alternatif", "kedua"]
+              },
+              {
+                  "question": "Bagaimana jika bangunan saya di-grief di luar area saya?",
+                  "answer": "Griefing di alam liar (di luar area Kamu) tetap dilarang. Segera ambil koordinat lokasi dan laporkan kepada admin beserta bukti jika ada. Admin akan membantu mengembalikan (rollback) kerusakan tersebut.",
+                  "keywords": ["grief", "hancur", "rusak", "alam", "liar", "rollback"]
+              }
+          ]
+      },
+      {
+          "category": "Teknis & Masalah",
+          "items": [
+              {
+                  "question": "Saya mengalami lag, apa yang harus saya lakukan?",
+                  "answer": "Pertama, coba periksa koneksi internetmu. Jika stabil, coba turunkan pengaturan grafis di Minecraft (render distance, particles, dll). Jika masih lag, kemungkinan server sedang ramai atau ada entitas yang memberatkan. Coba tanyakan di chat atau Discord.",
+                  "keywords": ["lag", "patah", "koneksi", "dc", "disconnect", "lambat"]
+              },
+              {
+                  "question": "Saya tidak bisa masuk ke server, ada pesan error. Kenapa?",
+                  "answer": "Pastikan versi Minecraft kamu sudah sesuai dengan versi server. Cek juga apakah server sedang dalam mode maintenance (perbaikan). Informasi maintenance selalu diumumkan di Discord. Jika masalah berlanjut, hubungi support.",
+                  "keywords": ["error", "gagal", "masuk", "login", "maintenance", "perbaikan"]
+              },
+              {
+                  "question": "Bagaimana cara menginstal OptiFine atau mod lainnya?",
+                  "answer": "Untuk Java nanti kami mengizinkan penggunaan mod client-side seperti OptiFine, mod minimap, atau mod peningkat FPS. Namun, mod yang memberikan keuntungan tidak adil (seperti X-Ray) dilarang. Cara instalasi bisa kamu cari di Google sesuai dengan mod-nya.",
+                  "keywords": ["mod", "optifine", "fps", "instal", "pasang"]
+              },
+              {
+                  "question": "Item saya hilang, apakah bisa dikembalikan?",
+                  "answer": "Admin hanya akan membantu mengembalikan item yang hilang akibat bug server atau kesalahan dari pihak admin, dengan syarat ada bukti yang kuat. Item yang hilang karena kelalaian pemain (misalnya mati di lava) tidak dapat kami kembalikan.",
+                  "keywords": ["item", "hilang", "bug", "kembali", "refund"]
+              }
+          ]
+      }
+    ]
+  }

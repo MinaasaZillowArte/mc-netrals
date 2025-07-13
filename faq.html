@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ - NTRL Community</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%231a0a2a'/%3E%3Cpath d='M3,3 V13 H5 V8 H7 L9,13 H11 V3 H9 V8 H7 L5,3 H3Z' fill='%2300f6ff'/%3E%3C/svg%3E">
+
+    <style>
+        :root {
+            --bg-dark: #100a1f;
+            --bg-medium: #1a0a2a;
+            --primary: #00f6ff; /* Cyan */
+            --secondary: #ff00ff; /* Magenta */
+            --text-light: #e0e0e0;
+            --text-dark: #a0a0a0;
+        }
+
+        body {
+            font-family: 'Press Start 2P', cursive;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            background-image: radial-gradient(circle at top left, rgba(255, 0, 255, 0.1), transparent 30%),
+                              radial-gradient(circle at bottom right, rgba(0, 246, 255, 0.1), transparent 30%);
+            overflow-x: hidden;
+        }
+        body.menu-open { overflow: hidden; }
+
+        .glowing-text {
+            animation: glowing 2s infinite;
+        }
+        @keyframes glowing {
+            0%, 100% { text-shadow: 0 0 3px #fff, 0 0 5px #fff, 0 0 7px var(--primary), 0 0 10px var(--primary); }
+            50% { text-shadow: 0 0 5px #fff, 0 0 10px var(--primary), 0 0 15px var(--primary), 0 0 20px var(--primary); }
+        }
+        
+        ::-webkit-scrollbar { width: 12px; }
+        ::-webkit-scrollbar-track { background: var(--bg-dark); }
+        ::-webkit-scrollbar-thumb { background: var(--secondary); border: 2px solid var(--bg-dark); }
+        ::-webkit-scrollbar-thumb:hover { background: var(--primary); }
+        
+        /* Navbar & Mobile Menu Styles */
+        #mobile-menu {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(16, 10, 31, 0.95);
+            backdrop-filter: blur(10px); z-index: 100;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            transform: translateY(-100%);
+            transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        #mobile-menu.menu-open { transform: translateY(0); }
+        #mobile-menu a {
+            font-size: 1.5rem; margin: 1.25rem 0; color: var(--text-light);
+            transition: color 0.3s, transform 0.3s;
+        }
+        #mobile-menu a:hover { color: var(--primary); transform: scale(1.1); }
+        
+        #header nav a {
+            position: relative; padding: 8px 4px; transition: color 0.3s ease-out;
+        }
+        #header nav a::after {
+            content: ''; position: absolute; bottom: 0; left: 50%;
+            transform: translateX(-50%); width: 0; height: 3px;
+            background-color: var(--primary); transition: width 0.3s ease-out;
+        }
+        #header nav a:hover::after, #header nav a.active-link::after { width: 100%; }
+        .active-link { color: var(--primary) !important; }
+        .active-link::after { width: 100%; }
+
+        /* FAQ Accordion Styles */
+        .faq-item .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s cubic-bezier(0, 1, 0, 1);
+        }
+        .faq-item.open .faq-answer {
+            max-height: 1000px; /* Large enough for content */
+            transition: max-height 1s ease-in-out;
+        }
+        .faq-item.open .icon-plus { display: none; }
+        .faq-item:not(.open) .icon-minus { display: none; }
+        
+        /* Support Chat Styles */
+        #support-chat-widget {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 1000;
+        }
+        #chat-window {
+            height: 450px;
+            width: 350px;
+            box-shadow: -8px 8px 0px var(--secondary);
+            transition: all 0.3s ease-out;
+        }
+        #chat-messages::-webkit-scrollbar { width: 8px; }
+        #chat-messages::-webkit-scrollbar-thumb { background: var(--primary); }
+        .chat-message.user {
+            background-color: var(--primary);
+            color: var(--bg-dark);
+            text-shadow: none;
+        }
+        .chat-message.bot {
+            background-color: var(--bg-medium);
+            border: 2px solid var(--secondary);
+        }
+        .typing-indicator span {
+            animation: blink 1.4s infinite both;
+        }
+        .typing-indicator span:nth-child(2) { animation-delay: .2s; }
+        .typing-indicator span:nth-child(3) { animation-delay: .4s; }
+        @keyframes blink {
+            0% { opacity: .2; }
+            20% { opacity: 1; }
+            100% { opacity: .2; }
+        }
+    </style>
+</head>
+<body>
+    <header id="header" class="bg-black/50 backdrop-blur-md border-b-4 border-b-[var(--secondary)] sticky w-full top-0 z-[110]">
+        <div class="container mx-auto px-4">
+            <nav class="flex items-center justify-between h-20">
+                <a href="index.html" class="text-3xl text-[var(--primary)] hover:text-white transition-colors" style="text-shadow: 2px 2px 0 var(--secondary);">
+                    NTRL
+                </a>
+                <div class="hidden md:flex items-center space-x-6 text-xs">
+                    <a href="index.html#hero" class="text-gray-300 hover:text-white">Home</a>
+                    <a href="index.html#rules" class="text-gray-300 hover:text-white">Peraturan</a>
+                    <a href="Info.html" class="text-gray-300 hover:text-white">Info Admin</a>
+                    <a href="Recuitment.html" class="text-gray-300 hover:text-white">Rekrutmen</a>
+                    <a href="faq.html" class="text-gray-300 hover:text-white active-link">FAQ</a>
+                    <a href="changelogs.html" class="text-gray-300 hover:text-white">Changelogs</a>
+                    <a href="https://minaasazillowarte.github.io/mc-status-page/" target="_blank" rel="noopener noreferrer" 
+                       class="text-[var(--primary)] glowing-text font-bold px-3 py-2 rounded-md border-2 border-[var(--primary)]/50 hover:bg-[var(--primary)]/10">
+                        Server Status
+                    </a>
+                </div>
+                <button id="mobile-menu-btn" class="md:hidden text-white focus:outline-none z-50">
+                    <svg id="menu-open-icon" class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                    <svg id="menu-close-icon" class="w-8 h-8 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+            </nav>
+        </div>
+    </header>
+    
+    <div id="mobile-menu" class="md:hidden">
+        <a href="index.html#hero" class="mobile-menu-link">Home</a>
+        <a href="index.html#rules" class="mobile-menu-link">Peraturan</a>
+        <a href="Info.html" class="mobile-menu-link">Info Admin</a>
+        <a href="Recuitment.html" class="mobile-menu-link">Rekrutmen</a>
+        <a href="faq.html" class="mobile-menu-link">FAQ</a>
+        <a href="changelogs.html" class="mobile-menu-link">Changelogs</a>
+        <a href="https://minaasazillowarte.github.io/mc-status-page/" target="_blank" rel="noopener noreferrer" class="mobile-menu-link text-[var(--primary)] glowing-text">Server Status</a>
+    </div>
+
+    <main class="container mx-auto px-4 py-16">
+        <div class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl text-white mb-4" style="text-shadow: 3px 3px 0 var(--primary);">Frequently Asked Questions (FAQ)</h1>
+            <p class="text-[var(--text-dark)] max-w-2xl mx-auto">Temukan jawaban untuk pertanyaan paling umum di sini.</p>
+        </div>
+
+        <div class="max-w-4xl mx-auto mb-12">
+            <input type="text" id="faq-search" placeholder="Ketik untuk mencari pertanyaan..." class="w-full p-4 bg-[var(--bg-medium)] border-4 border-[var(--secondary)] text-white placeholder-gray-500 rounded-lg focus:border-[var(--primary)] focus:outline-none text-sm">
+        </div>
+
+        <div id="faq-container" class="max-w-4xl mx-auto space-y-8">
+            </div>
+    </main>
+
+    <div id="support-chat-widget">
+        <div id="chat-window" class="hidden absolute bottom-20 right-0 bg-[var(--bg-dark)] border-4 border-[var(--primary)] rounded-lg w-full flex-col">
+            <div class="p-4 bg-[var(--bg-medium)] border-b-4 border-[var(--primary)]">
+                <h3 class="text-white text-lg">NTRL Support Bot</h3>
+            </div>
+            <div id="chat-messages" class="flex-1 p-4 space-y-4 overflow-y-auto">
+                <div class="chat-message bot p-3 rounded-lg max-w-xs text-sm">
+                    <p>Halo! Ada yang bisa dibantu? Ketik pertanyaanmu di bawah.</p>
+                </div>
+            </div>
+            <div class="p-4 border-t-4 border-[var(--primary)]">
+                <input type="text" id="chat-input" placeholder="Ketik pesan..." class="w-full p-3 bg-gray-900/50 border-2 border-gray-600 rounded-md focus:outline-none focus:border-[var(--primary)] text-sm">
+            </div>
+        </div>
+        <button id="chat-toggle-btn" class="w-20 h-20 bg-[var(--primary)] rounded-full flex items-center justify-center text-black" style="box-shadow: 4px 4px 0px var(--secondary);">
+            <svg class="w-10 h-10" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.08-3.239A8.962 8.962 0 012 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM4.416 14.652a6.962 6.962 0 003.868 1.348A6.962 6.962 0 0016 10c0-2.903-2.685-5-6-5s-6 2.097-6 5c0 1.43.58 2.753 1.528 3.734L4.416 14.652z" clip-rule="evenodd"></path></svg>
+        </button>
+    </div>
+
+    <footer class="bg-black/50 border-t-4 border-t-[var(--secondary)] py-8 mt-16">
+        <div class="container mx-auto px-4 flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0 text-sm">
+            <div class="text-[var(--text-dark)] order-3 md:order-1">&copy; <span id="year"></span> NTRL Community</div>
+            <div class="flex items-center space-x-2 text-[var(--text-light)] order-1 md:order-2">
+                <span>Made by Mizae with</span>
+                <svg class="w-5 h-5 text-red-500" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" /></svg>
+            </div>
+            <div class="text-2xl text-[var(--primary)] order-2 md:order-3" style="text-shadow: 2px 2px 0 var(--secondary);">NTRL</div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // --- GLOBAL VARIABLES ---
+            let allFaqItems = []; // To store all questions from JSON
+            const faqContainer = document.getElementById('faq-container');
+            const searchInput = document.getElementById('faq-search');
+
+            // --- FETCH FAQ DATA FROM JSON ---
+            async function loadFaqData() {
+                try {
+                    const response = await fetch('faq.json');
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    const data = await response.json();
+                    
+                    // Flatten the data for easier searching by the bot
+                    data.faq.forEach(category => {
+                        category.items.forEach(item => {
+                            allFaqItems.push(item);
+                        });
+                    });
+                    
+                    return data.faq;
+                } catch (error) {
+                    console.error("Could not load FAQ data:", error);
+                    faqContainer.innerHTML = `<p class="text-center text-red-500">Gagal memuat data FAQ. Silakan coba lagi nanti.</p>`;
+                    return [];
+                }
+            }
+            
+            // --- RENDER FAQ LIST ---
+            function renderFAQs(categories, filter = '') {
+                faqContainer.innerHTML = '';
+                let matchFound = false;
+
+                categories.forEach(category => {
+                    const filteredItems = category.items.filter(item =>
+                        item.question.toLowerCase().includes(filter.toLowerCase()) ||
+                        item.answer.toLowerCase().includes(filter.toLowerCase())
+                    );
+
+                    if (filteredItems.length > 0) {
+                        matchFound = true;
+                        const categoryTitle = document.createElement('h2');
+                        categoryTitle.className = 'text-2xl text-[var(--secondary)] mb-4';
+                        categoryTitle.textContent = category.category;
+                        faqContainer.appendChild(categoryTitle);
+                        
+                        const itemsContainer = document.createElement('div');
+                        itemsContainer.className = 'space-y-4 mb-8';
+
+                        filteredItems.forEach(item => {
+                            const faqElement = document.createElement('div');
+                            faqElement.className = 'faq-item bg-[var(--bg-medium)] border-2 border-gray-700 rounded-lg';
+                            faqElement.innerHTML = `
+                                <button class="faq-question w-full flex justify-between items-center text-left p-4">
+                                    <span class="text-sm md:text-base text-white">${item.question}</span>
+                                    <div class="text-[var(--primary)]">
+                                        <svg class="icon-plus w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                                        <svg class="icon-minus w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"></path></svg>
+                                    </div>
+                                </button>
+                                <div class="faq-answer px-4 pb-4">
+                                    <p class="text-sm text-[var(--text-dark)] border-t-2 border-gray-700 pt-4">${item.answer}</p>
+                                </div>
+                            `;
+                            itemsContainer.appendChild(faqElement);
+                        });
+                        faqContainer.appendChild(itemsContainer);
+                    }
+                });
+
+                if (!matchFound && filter) {
+                    faqContainer.innerHTML = `<p class="text-center text-[var(--text-dark)]">Tidak ada pertanyaan yang cocok dengan pencarianmu.</p>`;
+                }
+                
+                // Add click listeners after rendering
+                document.querySelectorAll('.faq-question').forEach(button => {
+                    button.addEventListener('click', () => {
+                        button.parentElement.classList.toggle('open');
+                    });
+                });
+            }
+
+            // --- INITIALIZE THE PAGE ---
+            const faqCategories = await loadFaqData();
+            renderFAQs(faqCategories);
+
+            // --- FAQ SEARCH LOGIC ---
+            searchInput.addEventListener('input', () => {
+                renderFAQs(faqCategories, searchInput.value);
+            });
+
+            // --- SUPPORT CHAT LOGIC (remains mostly the same) ---
+            const chatToggleButton = document.getElementById('chat-toggle-btn');
+            const chatWindow = document.getElementById('chat-window');
+            const chatMessages = document.getElementById('chat-messages');
+            const chatInput = document.getElementById('chat-input');
+
+            chatToggleButton.addEventListener('click', () => {
+                chatWindow.classList.toggle('hidden');
+                chatWindow.classList.toggle('flex');
+            });
+
+            chatInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter' && chatInput.value.trim() !== '') {
+                    const userMessage = chatInput.value.trim();
+                    appendMessage(userMessage, 'user');
+                    chatInput.value = '';
+                    handleBotResponse(userMessage);
+                }
+            });
+
+            function appendMessage(text, sender, isHTML = false) {
+                const messageDiv = document.createElement('div');
+                messageDiv.className = `chat-message ${sender} p-3 rounded-lg max-w-xs text-sm self-${sender === 'user' ? 'end' : 'start'}`;
+                if (isHTML) { messageDiv.innerHTML = text; } 
+                else { messageDiv.textContent = text; }
+                chatMessages.appendChild(messageDiv);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }
+            
+            function showTypingIndicator() {
+                const typingDiv = document.createElement('div');
+                typingDiv.id = 'typing-indicator';
+                typingDiv.className = 'chat-message bot p-3 rounded-lg max-w-xs text-sm self-start';
+                typingDiv.innerHTML = `<div class="typing-indicator"><span></span><span></span><span></span></div>`;
+                chatMessages.appendChild(typingDiv);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }
+
+            function removeTypingIndicator() {
+                const indicator = document.getElementById('typing-indicator');
+                if (indicator) indicator.remove();
+            }
+
+            function handleBotResponse(userInput) {
+                showTypingIndicator();
+                
+                setTimeout(() => {
+                    removeTypingIndicator();
+                    const userWords = userInput.toLowerCase().split(/\s+/);
+                    let bestMatch = null;
+                    let maxScore = 0;
+
+                    allFaqItems.forEach(faq => {
+                        let currentScore = 0;
+                        const combinedText = (faq.question + " " + faq.keywords.join(" ")).toLowerCase();
+                        userWords.forEach(word => {
+                            if (word.length > 2 && combinedText.includes(word)) {
+                                currentScore++;
+                            }
+                        });
+                        if (currentScore > maxScore) {
+                            maxScore = currentScore;
+                            bestMatch = faq;
+                        }
+                    });
+
+                    if (bestMatch && maxScore > 0) {
+                        const botResponse = `Mungkin ini yang kamu cari?<br><br><strong class="text-[var(--primary)]">${bestMatch.question}</strong><br><p class="mt-2 text-xs">${bestMatch.answer}</p>`;
+                        appendMessage(botResponse, 'bot', true);
+                    } else {
+                        const notFoundResponse = "Maaf, aku tidak menemukan jawaban yang cocok. Coba gunakan kata kunci lain atau lihat daftar FAQ di atas.";
+                        appendMessage(notFoundResponse, 'bot');
+                    }
+                }, 1500);
+            }
+
+            // --- General Page Setup ---
+            document.getElementById('year').textContent = new Date().getFullYear();
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const openIcon = document.getElementById('menu-open-icon');
+            const closeIcon = document.getElementById('menu-close-icon');
+            const body = document.body;
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('menu-open');
+                openIcon.classList.toggle('hidden');
+                closeIcon.classList.toggle('hidden');
+                body.classList.toggle('menu-open');
+            });
+        });
+    </script>
+</body>
+</html>

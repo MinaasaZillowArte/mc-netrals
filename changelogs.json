@@ -1,0 +1,123 @@
+{
+    "changelogs": [
+      {
+        "id": "v1.8",
+        "version": "1.8",
+        "title": "Fix the Server",
+        "release_date": "13 Juli 2025",
+        "changes": [
+          {
+            "type": "Fixed",
+            "items": [
+              { "tag": "BUG", "description": "Memperbaiki server mengalami down terus menerus." }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "v1.7",
+        "version": "1.7",
+        "title": "More Effeciency Server Loads",
+        "release_date": "10 Juli 2025",
+        "changes": [
+          {
+            "type": "Removed",
+            "items": [
+              { "tag": "DELETE", "description": "Resource Pack Action and Stuff di hapus karena ngelag" }
+            ]
+          },
+          {
+            "type": "Fixed",
+            "items": [
+              { "tag": "BUG", "description": "Memperbaiki bug duplikasi uang yang langka terjadi saat server lag." },
+              { "tag": "BUG", "description": "Tampilan saldo uang sekarang diperbarui secara real-time." }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "v1.6",
+        "version": "1.6",
+        "title": "Anti Cheat Update",
+        "release_date": "6 Juli 2025",
+        "changes": [
+          {
+            "type": "Added",
+            "items": [
+              { "tag": "NEW", "description": "Penambahan Anti-Cheat Systems." },
+              { "tag": "NEW", "description": "Sistem Baru untuk player nakal yang suka griefing, banned langsung (8 Hari)." }
+            ]
+          },
+          {
+            "type": "Changed",
+            "items": [
+              { "tag": "TWEAK", "description": "Untuk download world dikurangi jadi 18MB" }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "v1.5",
+        "version": "1.5",
+        "title": "The Quality of Life",
+        "release_date": "2 Juli 2025",
+        "changes": [
+          {
+            "type": "Added",
+            "items": [
+              { "tag": "NEW", "description": "Resource Pack Action and Stuff ditambahkan" },
+              { "tag": "NEW", "description": "Plugin Capacitor untuk Farm" }
+            ]
+          },
+          {
+            "type": "Changed",
+            "items": [
+              { "tag": "NERF", "description": "Ukuran Download worlds jadi 30 MB." }
+            ]
+          },
+          {
+            "type": "Fixed",
+            "items": [
+              { "tag": "BUG", "description": "Memperbaiki beberapa masalah performa yang menyebabkan lag sporadis." }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "v1.0",
+        "version": "1.0",
+        "title": "Grand Opening",
+        "release_date": "30 Juni 2025",
+        "changes": [
+          {
+            "type": "Added",
+            "items": [
+              { "tag": "NEW", "description": "Server resmi dibuka untuk publik!" },
+              { "tag": "NEW", "description": "Plugin dasar seperti realis light, tree capacitor, dan anti-cheat diaktifkan." },
+              { "tag": "NEW", "description": "Dunia Survival, Nether, dan End digenerate." }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "v0.5",
+        "version": "0.5",
+        "title": "Beta Test",
+        "release_date": "29 Juni 2025",
+        "changes": [
+          {
+            "type": "Added",
+            "items": [
+              { "tag": "NEW", "description": "Server pertama kali online untuk tahap closed-beta." }
+            ]
+          },
+          {
+            "type": "Fixed",
+            "items": [
+              { "tag": "BUG", "description": "Melakukan banyak perbaikan bug awal dan penyesuaian konfigurasi plugin." }
+            ]
+          }
+        ]
+      }
+    ]
+  }

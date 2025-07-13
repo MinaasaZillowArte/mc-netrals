@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Changelogs - NTRL Community</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%231a0a2a'/%3E%3Cpath d='M3,3 V13 H5 V8 H7 L9,13 H11 V3 H9 V8 H7 L5,3 H3Z' fill='%2300f6ff'/%3E%3C/svg%3E">
+
+    <style>
+        :root {
+            --bg-dark: #100a1f;
+            --bg-medium: #1a0a2a;
+            --primary: #00f6ff;
+            --secondary: #ff00ff;
+            --text-light: #e0e0e0;
+            --text-dark: #a0a0a0;
+            --tag-add: #22c55e;    /* Green */
+            --tag-change: #3b82f6; /* Blue */
+            --tag-fix: #ef4444;    /* Red */
+            --tag-delete: #9333ea; /* Purple */
+        }
+
+        body {
+            font-family: 'Press Start 2P', cursive;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            background-image: radial-gradient(circle at top left, rgba(255, 0, 255, 0.05), transparent 40%),
+                              radial-gradient(circle at bottom right, rgba(0, 246, 255, 0.05), transparent 40%);
+        }
+        body.menu-open { overflow: hidden; }
+
+        /* Navbar & Mobile Menu Styles */
+        #mobile-menu {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(16, 10, 31, 0.95);
+            backdrop-filter: blur(10px); z-index: 100;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            transform: translateY(-100%); transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        #mobile-menu.menu-open { transform: translateY(0); }
+        #mobile-menu a { font-size: 1.5rem; margin: 1.25rem 0; color: var(--text-light); transition: color 0.3s, transform 0.3s; }
+        #mobile-menu a:hover { color: var(--primary); transform: scale(1.1); }
+        
+        #header nav a { position: relative; padding: 8px 4px; transition: color 0.3s ease-out; }
+        #header nav a::after {
+            content: ''; position: absolute; bottom: 0; left: 50%;
+            transform: translateX(-50%); width: 0; height: 3px;
+            background-color: var(--primary); transition: width 0.3s ease-out;
+        }
+        #header nav a:hover::after, #header nav a.active-link::after { width: 100%; }
+        .active-link { color: var(--primary) !important; }
+        .active-link::after { width: 100%; }
+
+        /* Sidebar Styles */
+        #changelog-sidebar-content a {
+            transition: all 0.2s ease-in-out;
+            border-left: 4px solid transparent;
+        }
+        #changelog-sidebar-content a:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+            border-left-color: var(--secondary);
+            transform: translateX(5px);
+        }
+        #changelog-sidebar-content a.active {
+            background-color: rgba(0, 246, 255, 0.1);
+            border-left-color: var(--primary);
+            color: white;
+            transform: translateX(5px);
+        }
+
+        /* Changelog Content Styles */
+        .changelog-version-card {
+            border: 2px solid var(--bg-medium);
+            box-shadow: 8px 8px 0px var(--bg-medium);
+            transition: all 0.3s ease-out;
+        }
+        .changelog-version-card:hover {
+            border-color: var(--secondary);
+        }
+        
+        .change-tag {
+            font-size: 0.7rem;
+            padding: 2px 8px;
+            border-radius: 9999px;
+            color: var(--bg-dark);
+            text-shadow: none;
+            text-transform: uppercase;
+        }
+        .tag-NEW { background-color: var(--tag-add); }
+        .tag-TWEAK, .tag-BUFF, .tag-NERF { background-color: var(--tag-change); }
+        .tag-DELETE { background-color: var(--tag-delete); }
+        .tag-BUG { background-color: var(--tag-fix); }
+        
+        /* Animations */
+        .scroll-animate {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .scroll-animate.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="text-sm">
+    <header id="header" class="bg-black/50 backdrop-blur-md border-b-4 border-b-[var(--secondary)] sticky w-full top-0 z-[110]">
+        <div class="container mx-auto px-4">
+            <nav class="flex items-center justify-between h-20">
+                <a href="index.html" class="text-3xl text-[var(--primary)] hover:text-white transition-colors" style="text-shadow: 2px 2px 0 var(--secondary);">NTRL</a>
+                <div class="hidden md:flex items-center space-x-6 text-xs">
+                    <a href="index.html#hero" class="text-gray-300 hover:text-white">Home</a>
+                    <a href="index.html#rules" class="text-gray-300 hover:text-white">Peraturan</a>
+                    <a href="Info.html" class="text-gray-300 hover:text-white">Info Admin</a>
+                    <a href="Recuitment.html" class="text-gray-300 hover:text-white">Rekrutmen</a>
+                    <a href="faq.html" class="text-gray-300 hover:text-white">FAQ</a>
+                    <a href="changelogs.html" class="text-gray-300 hover:text-white active-link">Changelogs</a>
+                    <a href="https://minaasazillowarte.github.io/mc-status-page/" target="_blank" rel="noopener noreferrer" class="text-[var(--primary)] font-bold px-3 py-2 rounded-md border-2 border-[var(--primary)]/50 hover:bg-[var(--primary)]/10">Server Status</a>
+                </div>
+                <button id="mobile-menu-btn" class="md:hidden text-white focus:outline-none z-50">
+                    <svg id="menu-open-icon" class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                    <svg id="menu-close-icon" class="w-8 h-8 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+            </nav>
+        </div>
+    </header>
+    
+    <div id="mobile-menu" class="md:hidden">
+        <a href="index.html#hero" class="mobile-menu-link">Home</a>
+        <a href="index.html#rules" class="mobile-menu-link">Peraturan</a>
+        <a href="Info.html" class="mobile-menu-link">Info Admin</a>
+        <a href="Recuitment.html" class="mobile-menu-link">Rekrutmen</a>
+        <a href="faq.html" class="mobile-menu-link">FAQ</a>
+        <a href="changelogs.html" class="mobile-menu-link">Changelogs</a>
+        <a href="https://minaasazillowarte.github.io/mc-status-page/" target="_blank" rel="noopener noreferrer" class="mobile-menu-link text-[var(--primary)]">Server Status</a>
+    </div>
+
+    <main class="container mx-auto px-4 py-16">
+        <div class="text-center mb-16">
+            <h1 class="text-4xl md:text-5xl text-white mb-4" style="text-shadow: 3px 3px 0 var(--primary);">Server Changelogs</h1>
+            <p class="text-[var(--text-dark)] max-w-2xl mx-auto">Lihat riwayat pembaruan dan perubahan yang telah kami lakukan pada server NTRL.</p>
+        </div>
+
+        <div class="flex flex-col md:flex-row gap-12">
+            <aside class="md:w-1/4 lg:w-1/5">
+                <div id="changelog-sidebar" class="sticky top-28 space-y-2 text-xs">
+                    <h3 class="text-lg text-white px-4 mb-4">Versi Server</h3>
+                    <div id="changelog-sidebar-content" class="space-y-2">
+                        </div>
+                </div>
+            </aside>
+
+            <div id="changelog-content" class="md:w-3/4 lg:w-4/5 space-y-16">
+                </div>
+        </div>
+    </main>
+
+    <footer class="bg-black/50 border-t-4 border-t-[var(--secondary)] py-8 mt-16">
+        <div class="container mx-auto px-4 flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0 text-sm">
+            <div class="text-[var(--text-dark)] order-3 md:order-1">&copy; <span id="year"></span> NTRL Community</div>
+            <div class="flex items-center space-x-2 text-[var(--text-light)] order-1 md:order-2">
+                <span>Made by Mizae with</span>
+                <svg class="w-5 h-5 text-red-500" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" /></svg>
+            </div>
+            <div class="text-2xl text-[var(--primary)] order-2 md:order-3" style="text-shadow: 2px 2px 0 var(--secondary);">NTRL</div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const sidebarContent = document.getElementById('changelog-sidebar-content');
+            const mainContent = document.getElementById('changelog-content');
+
+            // Fetch data from JSON
+            async function loadChangelogs() {
+                try {
+                    const response = await fetch('changelogs.json');
+                    if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+                    const data = await response.json();
+                    return data.changelogs;
+                } catch (error) {
+                    console.error("Failed to load changelogs:", error);
+                    mainContent.innerHTML = `<p class="text-center text-red-500">Gagal memuat data changelogs.</p>`;
+                    return [];
+                }
+            }
+
+            // Generate content from data
+            function generateContent(changelogs) {
+                if (!changelogs || changelogs.length === 0) return;
+
+                changelogs.forEach(log => {
+                    // Create sidebar link
+                    const sidebarLink = document.createElement('a');
+                    sidebarLink.href = `#${log.id}`;
+                    sidebarLink.className = 'block p-4 rounded-r-lg text-gray-400';
+                    sidebarLink.textContent = `Versi ${log.version} - ${log.title}`;
+                    sidebarContent.appendChild(sidebarLink);
+
+                    // Create main content section
+                    const section = document.createElement('section');
+                    section.id = log.id;
+                    section.className = 'scroll-animate';
+
+                    let changesHTML = '';
+                    log.changes.forEach(change => {
+                        let itemsHTML = '';
+                        change.items.forEach(item => {
+                            itemsHTML += `<li class="flex items-start gap-3"><span class="change-tag tag-${item.tag}">${item.tag}</span><span class="flex-1">${item.description}</span></li>`;
+                        });
+                        changesHTML += `
+                            <div>
+                                <h4 class="text-xl text-[var(--primary)] mb-3">${change.type}</h4>
+                                <ul class="space-y-3 pl-2 text-gray-300">${itemsHTML}</ul>
+                            </div>
+                        `;
+                    });
+
+                    section.innerHTML = `
+                        <div class="changelog-version-card bg-[var(--bg-medium)] p-8 rounded-lg">
+                            <h2 class="text-3xl text-white mb-2">Versi ${log.version} <span class="text-base text-gray-500">- ${log.title}</span></h2>
+                            <p class="text-gray-400 mb-8 text-xs">Dirilis: ${log.release_date}</p>
+                            <div class="space-y-6">${changesHTML}</div>
+                        </div>
+                    `;
+                    mainContent.appendChild(section);
+                });
+            }
+            
+            // Run generation and then set up interactivity
+            const changelogData = await loadChangelogs();
+            generateContent(changelogData);
+            
+            // --- INTERACTIVITY SETUP (must run after content is generated) ---
+            const scrollElements = document.querySelectorAll('.scroll-animate');
+            const sidebarLinks = document.querySelectorAll('#changelog-sidebar-content a');
+            const contentSections = document.querySelectorAll('#changelog-content section');
+
+            const elementInView = (el) => {
+                const elementTop = el.getBoundingClientRect().top;
+                return elementTop <= (window.innerHeight || document.documentElement.clientHeight) - 100;
+            };
+
+            const handleScrollAnimation = () => {
+                scrollElements.forEach(el => {
+                    if (elementInView(el)) el.classList.add('is-visible');
+                });
+            };
+
+            const handleScrollSpy = () => {
+                let currentSectionId = '';
+                contentSections.forEach(section => {
+                    if (pageYOffset >= section.offsetTop - 150) {
+                        currentSectionId = section.id;
+                    }
+                });
+
+                sidebarLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.href.endsWith(`#${currentSectionId}`)) {
+                        link.classList.add('active');
+                    }
+                });
+            };
+
+            window.addEventListener('scroll', () => {
+                handleScrollAnimation();
+                handleScrollSpy();
+            });
+
+            // Initial calls to set state on page load
+            handleScrollAnimation();
+            handleScrollSpy();
+
+            // --- General Page Setup ---
+            document.getElementById('year').textContent = new Date().getFullYear();
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const openIcon = document.getElementById('menu-open-icon');
+            const closeIcon = document.getElementById('menu-close-icon');
+            const body = document.body;
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('menu-open');
+                openIcon.classList.toggle('hidden');
+                closeIcon.classList.toggle('hidden');
+                body.classList.toggle('menu-open');
+            });
+        });
+    </script>
+</body>
+</html>
