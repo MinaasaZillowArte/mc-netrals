@@ -1,133 +1,128 @@
-Tentu, saya akan membuatkan README GitHub dengan format markdown yang menarik dan banyak visualisasi.
+<div align="center">
 
-# [Nama Proyek Anda]
+  <h1 style="font-family: 'Press Start 2P', cursive; text-shadow: 3px 3px 0px #ff00ff;">
+    NTRL Community Website
+  </h1>
 
-[](https://www.google.com/search?q=https://link-gambar-proyek-anda)
+  <p>
+    The official web portal for the <b>NTRL Minecraft Community</b>. A retro-themed, dynamic, and responsive website built to serve our players with all the information they need.
+  </p>
 
-[](https://www.google.com/search?q=https://example.com/build)
-[](https://opensource.org/licenses/MIT)
-[](https://www.google.com/search?q=https://github.com/username/repo/stargazers)
+  <p>
+    <img src="https://img.shields.io/badge/status-live-green?style=for-the-badge" alt="Status Live">
+    <img src="https://img.shields.io/badge/license-MIT-blue?style=for-the-badge" alt="License MIT">
+    <img src="https://img.shields.io/badge/built%20with-love%20%26%20code-ff00ff?style=for-the-badge" alt="Built with Love & Code">
+  </p>
 
------
+</div>
 
-## 🌟 Deskripsi Proyek
+---
 
-> [Slogan singkat proyek Anda yang menarik.]
+### **<g-emoji class="g-emoji" alias="link" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f517.png">🔗</g-emoji> Live Demo**
 
-Proyek ini adalah [jelaskan tujuan utama proyek Anda secara singkat dan jelas]. Dikembangkan dengan [sebutkan bahasa pemrograman dan teknologi utama yang digunakan], proyek ini bertujuan untuk [jelaskan manfaat utama proyek Anda bagi pengguna atau target audiens].
+> Experience the website live on GitHub Pages:
+> **[https://minaasazillowarte.github.io/mc-netrals/](https://minaasazillowarte.github.io/mc-netrals/)**
 
-### ✨ Fitur Utama
+---
 
-  * **Fitur 1:** [Deskripsi singkat fitur pertama. Sertakan visualisasi jika memungkinkan.]
+### **<g-emoji class="g-emoji" alias="camera_flash" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f4f8.png">📸</g-emoji> Project Showcase**
 
-    \<img src="[https://via.placeholder.com/400x200?text=Visualisasi+Fitur+1](https://www.google.com/search?q=https://via.placeholder.com/400x200%3Ftext%3DVisualisasi%2BFitur%2B1)" alt="Visualisasi Fitur 1"\>
+The NTRL website is designed with a unique retro-futuristic, pixel-art aesthetic.
 
-  * **Fitur 2:** [Deskripsi singkat fitur kedua. Sertakan visualisasi jika memungkinkan.]
+| Home Page | FAQ Page |
+| :---: | :---: |
+| _The main landing page invites new players and sets the retro tone._ | _A fully searchable FAQ page with a support chatbot._ |
+| ![Home Page Screenshot](https://i.imgur.com/u7qg0Wz.png) | ![FAQ Page Screenshot](https://i.imgur.com/vH9J0y0.png) |
 
-    > Contoh penggunaan fitur 2:
+| Changelogs | Admin Info |
+| :---: | :---: |
+| _A dynamic changelog page loaded from a simple JSON file._ | _Meet the team behind the server._ |
+| ![Changelog Screenshot](https://i.imgur.com/fL53m2g.png) | ![Admin Info Screenshot](https://i.imgur.com/2sR9W0f.png) |
 
-    \`\`\`python
+---
 
-    # Contoh kode untuk fitur 2
+### **<g-emoji class="g-emoji" alias="sparkles" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/2728.png">✨</g-emoji> Core Features**
 
-    print("Halo Dunia\!")
-    \`\`\`
+This isn't just a static site. It's packed with features to make it a true community hub.
 
-  * **Fitur 3:** [Deskripsi singkat fitur ketiga.]
+* **<g-emoji class="g-emoji" alias="art" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f3a8.png">🎨</g-emoji> Unique Retro-Futuristic UI:**
+    * Styled with the classic "Press Start 2P" pixel font.
+    * A vibrant color palette of cyan (`#00f6ff`) and magenta (`#ff00ff`) on a dark background.
+    * "Pixel-shadow" effects on cards and buttons for a chunky, 8-bit feel.
+    * Subtle background animations and scroll-triggered fade-in effects for a dynamic experience.
 
-  * ... dan banyak lagi\!
+* **<g-emoji class="g-emoji" alias="floppy_disk" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f4be.png">💾</g-emoji> JSON-Powered Dynamic Content:**
+    * The **FAQ** and **Changelogs** pages fetch their content from `.json` files (`faq.json`, `changelogs.json`).
+    * This allows server admins to update crucial information easily without ever touching the HTML code.
 
-### 🛠️ Instalasi
+* **<g-emoji class="g-emoji" alias="iphone" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f4f1.png">📱</g-emoji> Fully Responsive Design:**
+    * A clean mobile-first approach ensures the site is perfectly usable on any device.
+    * Includes a sleek, full-screen mobile navigation menu.
 
-Langkah-langkah untuk menginstal dan menjalankan proyek Anda:
+* **<g-emoji class="g-emoji" alias="mag" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f50d.png">🔎</g-emoji> Interactive FAQ System:**
+    * A live search bar that filters questions in real-time.
+    * Questions are presented in an accordion-style layout, keeping the UI clean.
+    * Features an integrated **Support Chatbot** that provides instant answers by searching the `faq.json` data for keywords.
 
-1.  **Prasyarat:** Pastikan Anda telah menginstal [sebutkan prasyarat seperti Node.js, Python, dll.]
+* **<g-emoji class="g-emoji" alias="bookmark_tabs" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f4d1.png">📑</g-emoji> Versioned Changelog:**
+    * Changelogs are clearly organized by version number.
+    * Features a scroll-spy navigation sidebar that highlights the current version being viewed.
+    * Changes are tagged (`NEW`, `BUG`, `FIXED`, `REMOVED`) with distinct colors for at-a-glance understanding.
 
-    \`\`\`bash
+* **<g-emoji class="g-emoji" alias="busts_in_silhouette" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f465.png">👥</g-emoji> Community Pages:**
+    * **Info Admin:** A dedicated page to introduce the server owners and staff.
+    * **Recruitment:** Outlines open staff positions with detailed responsibilities and requirements, linking directly to an application form.
 
-    # Contoh cara memeriksa prasyarat (opsional)
+---
 
-    node -v
-    python --version
-    \`\`\`
+### **<g-emoji class="g-emoji" alias="computer" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f4bb.png">💻</g-emoji> Tech Stack**
 
-2.  **Klon repositori:**
+This project leverages modern web technologies while maintaining a simple, dependency-free vanilla stack.
 
-    \`\`\`bash
-    git clone [https://github.com/username/repo.git](https://github.com/username/repo.git)
-    cd repo
-    \`\`\`
+* **HTML5**
+* **[Tailwind CSS](https://tailwindcss.com/)** - For utility-first styling.
+* **Vanilla JavaScript** - For all dynamic functionality, including the FAQ/Changelog loaders and the support bot logic.
+* **JSON** - As a lightweight database for site content.
 
-3.  **Instal dependensi:**
+---
 
-    \`\`\`bash
-    npm install  \# atau pip install -r requirements.txt, dll.
-    \`\`\`
+### **<g-emoji class="g-emoji" alias="gear" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/2699.png">⚙️</g-emoji> Getting Started**
 
-4.  **Konfigurasi:** [Jelaskan langkah-langkah konfigurasi jika diperlukan. Sertakan contoh file konfigurasi.]
+Since this is a vanilla project, running it locally is incredibly simple.
 
-    \`\`\`ini
+1.  **Clone the repository:**
+    ```sh
+    git clone [https://github.com/minaasazillowarte/mc-netrals.git](https://github.com/minaasazillowarte/mc-netrals.git)
+    ```
+2.  **Navigate to the directory:**
+    ```sh
+    cd mc-netrals
+    ```
+3.  **Open `index.html` in your browser:**
+    * You can simply double-click the file, or use a local server extension like Live Server in VS Code for a better development experience.
 
-    # Contoh file konfigurasi
+---
 
-    DATABASE\_URL=your\_database\_url
-    API\_KEY=your\_api\_key
-    \`\`\`
+### **<g-emoji class="g-emoji" alias="pencil2" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/270f.png">📝</g-emoji> How to Manage Content**
 
-5.  **Jalankan proyek:**
+The biggest advantage of this project is the ease of content management.
 
-    \`\`\`bash
-    npm start  \# atau python main.py, dll.
-    \`\`\`
+#### **Updating the FAQ**
 
-### 🚀 Cara Penggunaan
+To add, remove, or edit a question, simply open and edit the `faq.json` file. The structure is self-explanatory.
 
-Jelaskan secara detail cara menggunakan proyek Anda. Sertakan contoh penggunaan kode, tangkapan layar antarmuka, atau diagram alur kerja jika relevan.
-
-#### Contoh Penggunaan:
-
-1.  **Langkah 1:** [Deskripsi langkah pertama.]
-
-    \<img src="[https://via.placeholder.com/600x300?text=Tangkapan+Layar+Langkah+1](https://www.google.com/search?q=https://via.placeholder.com/600x300%3Ftext%3DTangkapan%2BLayar%2BLangkah%2B1)" alt="Tangkapan Layar Langkah 1"\>
-
-2.  **Langkah 2:** [Deskripsi langkah kedua.]
-
-    \`\`\`javascript
-    // Contoh kode langkah 2
-    const result = myFunction(input);
-    console.log(result);
-    \`\`\`
-
-3.  ... dan seterusnya.
-
-Anda juga dapat melihat [link ke dokumentasi lengkap atau demo video](https://www.google.com/search?q=https://example.com/dokumentasi).
-
------
-
-## 🤝 Kontribusi
-
-Kami sangat senang dengan kontribusi dari komunitas\! Jika Anda ingin berkontribusi pada proyek ini, silakan ikuti langkah-langkah berikut:
-
-1.  **Fork repositori** di GitHub.
-2.  **Buat branch** untuk fitur atau perbaikan Anda: `git checkout -b fitur-baru` atau `git checkout -b perbaikan-bug`.
-3.  **Lakukan perubahan** dan commit: `git commit -am 'Tambahkan fitur baru'`.
-4.  **Push ke branch** Anda: `git push origin fitur-baru`.
-5.  **Buat Pull Request** ke branch `main` repositori utama.
-
-Mohon ikuti [pedoman kontribusi](https://www.google.com/search?q=https://example.com/kontribusi) kami.
-
------
-
-## 📞 Kontak
-
-Jika Anda memiliki pertanyaan atau masukan, jangan ragu untuk menghubungi kami melalui:
-
-  * Email: [alamat email Anda]
-  * Twitter: [@username\_twitter](https://www.google.com/search?q=https://twitter.com/username_twitter)
-  * GitHub Issues: [link ke halaman Issues](https://www.google.com/search?q=https://github.com/username/repo/issues)
-
------
-
-## 🙏 Ucapan Terima Kasih
-
-Kami ingin mengucapkan terima kasih kepada [Mizae, Hplayfree].
+```json
+{
+  "faq": [
+    {
+      "category": "Pertanyaan Umum",
+      "items": [
+        {
+          "question": "Ini pertanyaan baru saya?",
+          "answer": "Ini adalah jawaban untuk pertanyaan baru. Javascript akan otomatis menampilkannya di halaman FAQ.",
+          "keywords": ["kata", "kunci", "baru", "untuk", "bot"]
+        }
+      ]
+    }
+  ]
+}
