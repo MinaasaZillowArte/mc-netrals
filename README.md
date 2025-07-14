@@ -32,12 +32,12 @@ The NTRL website is designed with a unique retro-futuristic, pixel-art aesthetic
 | Home Page | FAQ Page |
 | :---: | :---: |
 | _The main landing page invites new players and sets the retro tone._ | _A fully searchable FAQ page with a support chatbot._ |
-| ![Home Page Screenshot](https://ibb.co/cKVywQhC) | ![FAQ Page Screenshot](https://ibb.co/8gx47fKw) |
+| ![Home Page Screenshot](https://i.ibb.co/wZjd74hw/image.png) | ![FAQ Page Screenshot](https://i.ibb.co/LdghZcky/image.png) |
 
 | Changelogs | Admin Info |
 | :---: | :---: |
 | _A dynamic changelog page loaded from a simple JSON file._ | _Meet the team behind the server._ |
-| ![Changelog Screenshot](https://ibb.co/cKgKdjvd) | ![Admin Info Screenshot](https://ibb.co/F4RJMfkv) |
+| ![Changelog Screenshot](https://i.ibb.co/hx7xvSMv/image.png) | ![Admin Info Screenshot](https://i.ibb.co/B20jx7HD/image.png) |
 
 ---
 
