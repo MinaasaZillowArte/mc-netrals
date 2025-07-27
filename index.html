@@ -159,6 +159,65 @@
         #header nav a:hover::after, #header nav a.active-link::after {
             width: 100%;
         }
+
+        /* --- CSS BARU UNTUK POP-UP --- */
+        #minelab-popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(16, 10, 31, 0.8);
+            backdrop-filter: blur(8px);
+            z-index: 9998;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.4s ease, visibility 0.4s ease;
+        }
+        #minelab-popup-overlay.is-visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        #minelab-popup-modal {
+            background-color: var(--bg-medium);
+            border: 4px solid var(--secondary);
+            box-shadow: 8px 8px 0px var(--primary);
+            padding: 2rem;
+            border-radius: 8px;
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+            position: relative;
+            transform: scale(0.9);
+            transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        #minelab-popup-overlay.is-visible #minelab-popup-modal {
+            transform: scale(1);
+        }
+        #minelab-popup-close-btn {
+            position: absolute;
+            top: -16px;
+            right: -16px;
+            width: 40px;
+            height: 40px;
+            background-color: var(--secondary);
+            color: var(--bg-dark);
+            border: 4px solid var(--bg-dark);
+            font-family: 'Press Start 2P', cursive;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        #minelab-popup-close-btn:hover {
+            background-color: var(--primary);
+            transform: rotate(90deg);
+        }
+        /* --- AKHIR DARI CSS BARU --- */
+
     </style>
 </head>
 <body>
@@ -276,8 +335,27 @@
         </div>
     </footer>
 
+    <div id="minelab-popup-overlay">
+        <div id="minelab-popup-modal">
+            <button id="minelab-popup-close-btn">X</button>
+            <h2 class="text-2xl md:text-3xl text-[var(--primary)] mb-4">Punya Server Impian?</h2>
+            <p class="text-sm text-[var(--text-dark)] mb-4">
+                Bosan dengan antrean & performa seadanya? Hosting terasa mahal?
+            </p>
+            <p class="text-base text-white mb-6">
+                Perkenalkan <b class="text-[var(--primary)]">Minelab</b>. Buat server Minecraft performa tinggi milikmu, gratis, dengan kekuatan Google Colab.
+            </p>
+            <a href="https://minelab.vercel.app/" target="_blank" rel="noopener noreferrer" class="pixel-btn bg-[var(--primary)] hover:bg-[var(--secondary)] text-black text-lg px-8 py-3 inline-block">
+                Jelajahi Minelab
+            </a>
+            <p class="text-xs text-gray-600 mt-6">
+                Proyek dari Mizae, didukung oleh Sophia & Jones Hanif.
+            </p>
+        </div>
+    </div>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            // --- KODE LAMA ANDA ---
             const mobileMenuBtn = document.getElementById('mobile-menu-btn');
             const mobileMenu = document.getElementById('mobile-menu');
             const openIcon = document.getElementById('menu-open-icon');
@@ -319,9 +397,8 @@
                 });
             };
 
-            // Highlight nav link on scroll
             const handleNavHighlight = () => {
-                 let current = 'hero'; // Default to hero
+                 let current = 'hero';
                  sections.forEach(section => {
                      const sectionTop = section.offsetTop;
                      if(pageYOffset >= sectionTop - 100){
@@ -331,7 +408,6 @@
                  
                  navLinks.forEach(a => {
                     a.classList.remove('active-link');
-                    // Check if the link's href contains the current section id
                     if(a.href && a.href.includes('#' + current)){
                         a.classList.add('active-link');
                     }
@@ -347,6 +423,39 @@
             handleNavHighlight();
 
             document.getElementById('year').textContent = new Date().getFullYear();
+
+            // --- JAVASCRIPT BARU UNTUK POP-UP ---
+            const popupOverlay = document.getElementById('minelab-popup-overlay');
+            const closeBtn = document.getElementById('minelab-popup-close-btn');
+
+            // Fungsi untuk menampilkan pop-up
+            const showPopup = () => {
+                popupOverlay.classList.add('is-visible');
+            };
+
+            // Fungsi untuk menyembunyikan pop-up
+            const hidePopup = () => {
+                popupOverlay.classList.remove('is-visible');
+                // Simpan status bahwa pop-up sudah ditutup di session storage
+                sessionStorage.setItem('minelabPopupClosed', 'true');
+            };
+
+            // Cek di session storage apakah pop-up sudah pernah ditutup
+            if (!sessionStorage.getItem('minelabPopupClosed')) {
+                // Jika belum, tampilkan pop-up setelah 3 detik
+                setTimeout(showPopup, 3000);
+            }
+
+            // Tambahkan event listener untuk tombol close
+            closeBtn.addEventListener('click', hidePopup);
+
+            // Juga sembunyikan jika user klik di area luar modal (overlay)
+            popupOverlay.addEventListener('click', (event) => {
+                if (event.target === popupOverlay) {
+                    hidePopup();
+                }
+            });
+            // --- AKHIR DARI JAVASCRIPT BARU ---
         });
     </script>
 </body>
